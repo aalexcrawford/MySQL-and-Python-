@@ -44,15 +44,15 @@ def createUser():
 		return jsonify({"user_name":"error creating user account"})
 
 # The /request is how we are going to differ between different queries i.e. /requestUserData or /requestContactData
-@app.route('/test', methods=['POST'])
+@app.route('/addContact', methods=['POST'])
 def addContact():
 	conn = connector.connect()
 	c = conn.cursor()
 	data = request.get_json()
 	u_id = data['user_id']
 	c_id = data['contact_id']
-	sql = "INSERT INTO contacts (contact_id) VALUES(%S) WHERE user_id=%s"
-	val = (c_id, u_id)
+	sql = "INSERT INTO contacts VALUES(%s, %s)"
+	val = (u_id, c_id)
 	try:
 		c.execute(sql,val)
 		return jsonify({"message":"contact successfully added"})
