@@ -6,7 +6,7 @@ cors = CORS(app)
 
 @app.route('/')
 def test():
-    return "Hello from Pycharm"
+    return "Hello from Alex"
 
 @app.route('/loginUser')
 def verifyLogin():
