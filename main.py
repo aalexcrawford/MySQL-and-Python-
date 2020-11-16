@@ -6,7 +6,7 @@ cors = CORS(app)
 
 @app.route('/')
 def test():
-    return "Hello from Flask!"
+    return "Hello from Pycharm"
 
 @app.route('/loginUser')
 def verifyLogin():
