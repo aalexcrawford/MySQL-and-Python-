@@ -13,7 +13,7 @@ def verifyContact(c_id):
 		contact = c.fetchone()
 		c_id_actual = contact[0]
 		return c_id_actual
-	except mysql.connector.Error as err:
+	except Exception as err:
 		print("Something went wrong: {}".format(err))
 
 @app.route('/')
