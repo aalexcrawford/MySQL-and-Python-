@@ -63,7 +63,7 @@ def addContact():
 	u_id = data['user_id']
 	c_id = data['contact_id']
 	c_id_actual = verifyContact(c_id)
-	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)"
+	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)'"
 	val = (u_id, c_id_actual)
 	try:
 		if (c_id_actual == -1):
