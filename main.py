@@ -55,6 +55,7 @@ def addContact():
 	val = (u_id, c_id)
 	try:
 		c.execute(sql,val)
+		conn.commit()
 		return jsonify({"message":"contact successfully added"})
 	except:
 		return jsonify({"message":"contact unable to be added"})
