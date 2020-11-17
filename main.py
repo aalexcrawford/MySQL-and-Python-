@@ -82,6 +82,7 @@ def removeContact():
 	u_id = data['user_id']
 	c_id = data['contact_id']
 	c_id_actual = verifyContact(c_id)
+	print(c_id_actual)
 	sql = "DELETE FROM contacts WHERE user_id=%s AND contact_id=%s"
 	val = (u_id, c_id_actual)
 	try:
