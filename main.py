@@ -18,7 +18,7 @@ def verifyContact(c_id):
 
 @app.route('/')
 def test():
-    return "Hello from Alex"
+    return "Hello from MacBook"
 
 @app.route('/loginUser')
 def verifyLogin():
@@ -50,7 +50,7 @@ def createUser():
 	try:
 		c.execute(sql, val)
 		conn.commit()
-		return jsonify({"user_name":"Welcome " + uName})
+		return jsonify({"user_name":"Welcome " + u_name})
 	except:
 		print("Failed to create user")
 		return jsonify({"user_name":"error creating user account"})
