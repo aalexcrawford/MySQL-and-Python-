@@ -51,8 +51,12 @@ def addContact():
 	data = request.get_json()
 	u_id = data['user_id']
 	c_id = data['contact_id']
+	try:
+		c_id_actual = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
+	except:
+		c_id_actual == NULL
 	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)"
-	val = (u_id, c_id)
+	val = (u_id, c_id_actual)
 	try:
 		c.execute(sql,val)
 		conn.commit()
