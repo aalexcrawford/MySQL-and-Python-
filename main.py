@@ -4,6 +4,15 @@ from MysqlConn import connector
 app = Flask(__name__)
 cors = CORS(app)
 
+def verifyContact(c_id):
+	conn = connector.connect()
+	c = conn.cursor()
+	try:
+		c_id_actual = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
+		return c_id_actual
+	except:
+		return -1
+
 @app.route('/')
 def test():
     return "Hello from Alex"
@@ -24,15 +33,6 @@ def verifyLogin():
 	except:
 		print("No such user found")
 		return jsonify({"user_id":"-1"})
-
-def verifyContact(c_id):
-	conn = connector.connect()
-	c = conn.cursor()
-	try:
-		c_id_actual = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
-		return c_id_actual
-	except:
-		return -1
 
 @app.route('/newUser', methods = ['POST'])
 def createUser():
@@ -82,7 +82,7 @@ def removeContact():
 	u_id = data['user_id']
 	c_id = data['contact_id']
 	c_id_actual = verifyContact(c_id)
-	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)"
+	sql = "DELETE FROM contacts WHERE user_id=%s AND contact_id=%s"
 	val = (u_id, c_id_actual)
 	try:
 		if(c_id_actual == -1):
