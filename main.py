@@ -70,10 +70,9 @@ def addContact():
 		conn.commit()
 		return jsonify({"message":"contact successfully added"})
 	except ValueError as e:
-		if (c_id_actual == -1):
-			raise ValueError("No Such User Found")
+		return jsonify({"message":"No Such User Found"})
 	except:
-		return jsonify({"message":"contact unable to be added"})
+		return jsonify({"message": "contact unable to be added"})
 
 @app.route('/removeContact', methods=['POST'])
 def removeContact():
