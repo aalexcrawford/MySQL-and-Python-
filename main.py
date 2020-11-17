@@ -51,7 +51,7 @@ def addContact():
 	data = request.get_json()
 	u_id = data['user_id']
 	c_id = data['contact_id']
-	sql = "INSERT INTO contacts VALUES(%s, %s)"
+	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)"
 	val = (u_id, c_id)
 	try:
 		c.execute(sql,val)
