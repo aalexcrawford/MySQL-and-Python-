@@ -13,8 +13,8 @@ def verifyContact(c_id):
 		contact = c.fetchone()
 		c_id_actual = contact[0]
 		return c_id_actual
-	except Exception as err:
-		print("Something went wrong: {}".format(err))
+	except:
+		return -1
 
 @app.route('/')
 def test():
