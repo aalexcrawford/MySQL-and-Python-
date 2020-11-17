@@ -91,7 +91,8 @@ def removeContact():
 		conn.commit()
 		return jsonify({"message": "contact successfully added"})
 	except ValueError as e:
-		return jsonify({"message": e})
+		errorStrg = e
+		return jsonify({"message": errorStrg})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
