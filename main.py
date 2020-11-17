@@ -9,7 +9,7 @@ def verifyContact(c_id):
 	c = conn.cursor()
 	print(c_id)
 	try:
-		c.execute("SELECT * FROM users WHERE user_id=%s", c_id)
+		c.execute("SELECT * FROM users WHERE user_id=%s", (str(c_id)))
 		contact = c.fetchone()
 		c_id_actual = contact[0]
 		return c_id_actual
