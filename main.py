@@ -89,7 +89,7 @@ def removeContact():
 			raise ValueError("No Such User Found")
 		c.execute(sql, val)
 		conn.commit()
-		return jsonify({"message": "contact successfully added"})
+		return jsonify({"message": "contact successfully removed"})
 	except ValueError:
 		return jsonify({"message": "No Such User Found"})
 
