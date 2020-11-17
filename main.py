@@ -25,6 +25,15 @@ def verifyLogin():
 		print("No such user found")
 		return jsonify({"user_id":"-1"})
 
+def verifyContact(c_id):
+	conn = connector.connect()
+	c = conn.cursor()
+	try:
+		c_id_actual = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
+		return c_id_actual
+	except:
+		return -1
+
 @app.route('/newUser', methods = ['POST'])
 def createUser():
 	conn = connector.connect()
@@ -43,7 +52,6 @@ def createUser():
 		print("Failed to create user")
 		return jsonify({"user_name":"error creating user account"})
 
-# The /request is how we are going to differ between different queries i.e. /requestUserData or /requestContactData
 @app.route('/addContact', methods=['POST'])
 def addContact():
 	conn = connector.connect()
@@ -63,6 +71,25 @@ def addContact():
 		return jsonify({"message":"contact successfully added"})
 	except:
 		return jsonify({"message":"contact unable to be added"})
+
+@app.route('/removeContact', methods=['POST'])
+def removeContact():
+	conn = connector.connect()
+	c = conn.cursor()
+	data = request.get_json()
+	u_id = data['user_id']
+	c_id = data['contact_id']
+	c_id_actual = verifyContact(c_id)
+	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)"
+	val = (u_id, c_id_actual)
+	try:
+		if(c_id_actual == -1):
+			raise ValueError("No Such User Found")
+		c.execute(sql, val)
+		conn.commit()
+		return jsonify({"message": "contact successfully added"})
+	except ValueError as e:
+		return jsonify({"message": e})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
