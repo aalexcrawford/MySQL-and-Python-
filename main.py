@@ -90,9 +90,8 @@ def removeContact():
 		c.execute(sql, val)
 		conn.commit()
 		return jsonify({"message": "contact successfully added"})
-	except ValueError as e:
-		errorStrg = e
-		return jsonify({"message": errorStrg})
+	except ValueError:
+		return jsonify({"message": "No Such User Found"})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
