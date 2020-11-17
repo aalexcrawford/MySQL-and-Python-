@@ -54,7 +54,7 @@ def addContact():
 	try:
 		c_id_actual = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
 	except:
-		c_id_actual == NULL
+		return jsonify({"message":"contact unable to be added"})
 	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)"
 	val = (u_id, c_id_actual)
 	try:
