@@ -8,7 +8,8 @@ def verifyContact(c_id):
 	conn = connector.connect()
 	c = conn.cursor()
 	try:
-		c_id_actual = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
+		contact = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
+		c_id_actual = contact[0]
 		return c_id_actual
 	except:
 		return -1
