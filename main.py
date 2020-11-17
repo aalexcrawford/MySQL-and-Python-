@@ -7,6 +7,7 @@ cors = CORS(app)
 def verifyContact(c_id):
 	conn = connector.connect()
 	c = conn.cursor()
+	print(c_id)
 	try:
 		c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
 		c_id_actual = c.fetchone()
