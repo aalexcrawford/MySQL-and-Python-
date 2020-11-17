@@ -9,8 +9,9 @@ def verifyContact(c_id):
 	c = conn.cursor()
 	print(c_id)
 	try:
-		c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
+		c.execute("SELECT * FROM users WHERE user_id=%s", c_id)
 		c_id_actual = c.fetchone()
+		print(c_id_actual)
 		return c_id_actual[0]
 	except:
 		return -1
