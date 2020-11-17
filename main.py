@@ -59,16 +59,18 @@ def addContact():
 	data = request.get_json()
 	u_id = data['user_id']
 	c_id = data['contact_id']
-	try:
-		c_id_actual = c.execute("SELECT user_id FROM users WHERE user_id=%s", c_id)
-	except:
-		return jsonify({"message":"contact unable to be added"})
+	c_id_actual = verifyContact(c_id)
 	sql = "INSERT INTO contacts (user_id, contact_id) VALUES(%s, %s)"
 	val = (u_id, c_id_actual)
 	try:
+		if (c_id_actual == -1):
+			raise ValueError("No Such User Found")
 		c.execute(sql,val)
 		conn.commit()
 		return jsonify({"message":"contact successfully added"})
+	except ValueError as e:
+		if (c_id_actual == -1):
+			raise ValueError("No Such User Found")
 	except:
 		return jsonify({"message":"contact unable to be added"})
 
