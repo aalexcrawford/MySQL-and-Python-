@@ -16,6 +16,18 @@ def verifyContact(c_id):
 	except:
 		return -1
 
+def validatePassword(u_id, old_pass):
+	conn = connector.connect()
+	c = conn.cursor()
+	sql = "SELECT user_id FROM users WHERE user_id=%s AND hashed_password=%s"
+	val = (u_id, old_pass)
+	try:
+		c.execute(sql, val)
+		u_id_actual = c.fetchone()
+		return u_id_actual[0]
+	except:
+		return -1
+
 @app.route('/')
 def test():
     return "Hello from MacBook"
@@ -95,6 +107,29 @@ def removeContact():
 		return jsonify({"message": "contact successfully removed"})
 	except ValueError:
 		return jsonify({"message": "No Such User Found"})
+	except:
+		return jsonify({"message":"Unable to remove contact"})
+
+@app.route('/changePass', method = ['POST'])
+def changePass():
+	conn = connector.connect()
+	c = conn.cursor()
+	data = request.get_json()
+	u_id = data['user_id']
+	old_h_password = data['old_hashed_password']
+	new_h_password = data['new_hashed_password']
+	flag = validatePassword(u_id, old_h_password)
+	val = (new_h_password,u_id)
+	sql = "UPDATE users SET hashed_password=%s WHERE user_id=%s"
+	try:
+		if(flag == -1):
+			raise ValueError("Incorrect password")
+		c.execute(sql, val)
+		conn.commit()
+	except ValueError:
+		return jsonify({"message":"Incorrect password"})
+	except:
+		return jsonify({"message":"password was unable to be changed"})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
