@@ -30,7 +30,7 @@ def validatePassword(u_id, old_pass):
 
 @app.route('/')
 def test():
-    return "Hello from InCognito"
+    return "Hello from Test"
 
 @app.route('/loginUser', methods = ['POST'])
 def verifyLogin():
