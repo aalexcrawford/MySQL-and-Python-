@@ -488,3 +488,136 @@ sudo nano main.py
 stop_flask
 debug_flask
 login_mysql
+sudo nano main.py 
+login_mysql
+git pull
+sudo nano main.py 
+stop_flask
+debug_flask
+stop_flask
+debug_flask
+sudo nano main.py 
+stop_flask
+debug_flask
+sudo nano main.py 
+login_mysql
+git push
+git push -u alexzandro.crawford@snhu.edu -p mGLAQ0*z4s@o5cq2
+git commit
+git add
+git commit
+sudo nano main.py 
+git commit main.py 
+git push
+git commit 
+git commit main.py 
+git push
+sudo nano main.py 
+git push
+git commit main.py 
+git push
+exit
+ls
+git pull
+stop_flask
+debug_flask
+login_mysql
+git pul
+git pull
+stop_flask
+debug_flask
+git pull
+stop_flask
+debug_flask
+stop_flask
+debug_flask
+git pull
+stop_flask
+debug_flask
+git pull
+stop_flask
+debug_flask
+git pull
+stop_flask
+debug_flask
+stop_flask
+git pull
+debug_flask
+stop_flask
+debug_flask
+stop_flask
+git pull
+debug_flask
+login_mysql
+stop_flask
+git pull
+debug_flask
+login_mysql
+stop_flask
+git pull
+debug_flask
+stop_flask
+git pull
+debug_flask
+stop_flask
+git pull
+debug_flask
+login_mysql
+stop_flask
+git pull
+debug_flask
+stop_flask
+git pull
+debug_flask
+login_mysql
+stop_flask
+git pull
+debug_flask
+git pull
+stop_flask
+debug_flask
+exit
+login_mysql
+exit 
+login_mysql
+EXIT 
+EXIT
+exit
+git pull
+sudo nano main.py 
+exit
+git pull
+git commit
+git pull
+git commit main.py 
+git push
+git pull 
+git pull
+git
+git merge
+git work tree
+git branch
+git merge remote/master
+git merge origin/master
+git fetch
+git merge origin/master
+git pull origin/master
+git pull
+git commit 
+git commit main.py 
+exit 
+git pull
+sudo nano main.py 
+git commit main.py 
+git pull
+sudo nano main.py 
+git merge
+git 
+git fetch
+git pull
+sudo nano main.py 
+git merge origin/master
+git tree
+git mktree
+git branch
+git log --all --graph --decorate --oneline
