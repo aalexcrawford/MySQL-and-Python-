@@ -32,7 +32,7 @@ def validatePassword(u_id, old_pass):
 def test():
     return "Hello from MacBook"
 
-@app.route('/loginUser')
+@app.route('/loginUser', methods = ['POST'])
 def verifyLogin():
 	conn = connector.connect()
 	c = conn.cursor()
