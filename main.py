@@ -148,5 +148,21 @@ def changePass():
 	except:
 		return jsonify({"message":"password was unable to be changed"})
 
+@app.route('/sendMessage', method = ['POST'])
+def sendMessage():
+	conn = connector.connect()
+	c = conn.cursor()
+	data = request.get_json()
+	m = data['message']
+	s_id = data['sender']
+	r_id = data['receiver']
+	val = (m, s_id, r_id)
+	sql = 'INSERT INTO messages(message) VALUES (%s) WHERE sender=%s and receiver=%s'
+	try:
+		c.execute(sql, val)
+		return jsonify({"message":"Message sent"})
+	except:
+		return jsonify({"message":"Unable to send message"})
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
