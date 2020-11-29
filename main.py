@@ -127,7 +127,7 @@ def removeContact():
 	except:
 		return jsonify({"message":"Unable to remove contact"})
 
-@app.route('/changePass', method = ['POST'])
+@app.route('/changePass', methods = ['POST'])
 def changePass():
 	conn = connector.connect()
 	c = conn.cursor()
