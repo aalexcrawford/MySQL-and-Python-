@@ -26,6 +26,7 @@ def validatePassword(u_id, old_pass):
 		u_id_actual = c.fetchone()
 		return u_id_actual[0]
 	except:
+		print("Error Validating Password")
 		return -1
 
 def verifyUsername(u_name):
