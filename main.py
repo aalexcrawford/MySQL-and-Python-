@@ -24,6 +24,7 @@ def validatePassword(u_id, old_pass):
 	try:
 		c.execute(sql, val)
 		u_id_actual = c.fetchone()
+		print("Able to update Password")
 		return u_id_actual[0]
 	except:
 		print("Error Validating Password")
