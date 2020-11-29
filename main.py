@@ -148,7 +148,7 @@ def changePass():
 	except:
 		return jsonify({"message":"password was unable to be changed"})
 
-@app.route('/sendMessage', method = ['POST'])
+@app.route('/sendMessage', methods = ['POST'])
 def sendMessage():
 	conn = connector.connect()
 	c = conn.cursor()
