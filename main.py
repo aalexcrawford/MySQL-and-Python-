@@ -145,6 +145,7 @@ def changePass():
 			raise ValueError("Incorrect password")
 		c.execute(sql, val)
 		conn.commit()
+		return jsonify({"message":"password updated"})
 	except ValueError:
 		return jsonify({"message":"Incorrect password"})
 	except:
