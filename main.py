@@ -24,7 +24,7 @@ def validatePassword(u_id, old_pass):
 	try:
 		c.execute(sql, val)
 		u_id_actual = c.fetchone()
-		print("Able to update Password")
+		print("Able to validate Password")
 		return u_id_actual[0]
 	except:
 		print("Error Validating Password")
@@ -160,7 +160,7 @@ def sendMessage():
 	s_id = data['sender']
 	r_id = data['receiver']
 	val = (m, s_id, r_id)
-	sql = 'INSERT INTO messages(message) VALUES (%s) WHERE sender=%s and receiver=%s'
+	sql = 'INSERT INTO messages(message, sender, receiver, time) VALUES (%s, %s, %s, unix_timestamp()) '
 	try:
 		c.execute(sql, val)
 		return jsonify({"message":"Message sent"})
