@@ -12,7 +12,6 @@ contact_id INT NOT NULL REFERENCES users(user_id)
 
 CREATE TABLE IF NOT EXISTS pke(
 user_id INT NOT NULL REFERENCES users(user_id),
-device_id INT NOT NULL REFERENCES devices(device_id),
 user_pke VARCHAR(1000)
 );
 
