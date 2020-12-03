@@ -24,9 +24,23 @@ def validatePassword(u_id, old_pass):
 	try:
 		c.execute(sql, val)
 		u_id_actual = c.fetchone()
+		print("Able to validate Password")
 		return u_id_actual[0]
 	except:
+		print("Error Validating Password")
 		return -1
+
+def verifyUsername(u_name):
+	conn = connector.connect()
+	c = conn.cursor()
+	sql = "SELECT * FROM users WHERE user_name=%s"
+	val = (u_name,)
+	try:
+		c.execute(sql, val)
+		conn.commit()
+		return -1
+	except:
+		return 0
 
 @app.route('/')
 def test():
@@ -57,12 +71,17 @@ def createUser():
 	u_name = data['user_name']
 	h_password = data['hashed_password']
 	e_mail = data['email']
+	flag = verifyUsername(u_name)
 	sql = "INSERT INTO users (user_name, hashed_password, email) VALUES (%s, %s, %s)"
 	val = (u_name, h_password, e_mail)
 	try:
+		if(flag == -1):
+			raise ValueError("Username is already used")
 		c.execute(sql, val)
 		conn.commit()
 		return jsonify({"user_name":"Welcome " + u_name})
+	except ValueError:
+		return jsonify({"message":"Username is already used"})
 	except:
 		print("Failed to create user")
 		return jsonify({"user_name":"error creating user account"})
@@ -110,7 +129,7 @@ def removeContact():
 	except:
 		return jsonify({"message":"Unable to remove contact"})
 
-@app.route('/changePass', method = ['POST'])
+@app.route('/changePass', methods = ['POST'])
 def changePass():
 	conn = connector.connect()
 	c = conn.cursor()
@@ -126,10 +145,27 @@ def changePass():
 			raise ValueError("Incorrect password")
 		c.execute(sql, val)
 		conn.commit()
+		return jsonify({"message":"password updated"})
 	except ValueError:
 		return jsonify({"message":"Incorrect password"})
 	except:
 		return jsonify({"message":"password was unable to be changed"})
+
+@app.route('/sendMessage', methods = ['POST'])
+def sendMessage():
+	conn = connector.connect()
+	c = conn.cursor()
+	data = request.get_json()
+	m = data['message']
+	s_id = data['sender']
+	r_id = data['receiver']
+	val = (m, s_id, r_id)
+	sql = 'INSERT INTO messages(message, sender, receiver, time) VALUES (%s, %s, %s, unix_timestamp()) '
+	try:
+		c.execute(sql, val)
+		return jsonify({"message":"Message sent"})
+	except:
+		return jsonify({"message":"Unable to send message"})
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
