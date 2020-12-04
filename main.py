@@ -167,5 +167,39 @@ def sendMessage():
 	except:
 		return jsonify({"message":"Unable to send message"})
 
+@app.route('/getMessages', methods = ['POST'])
+def getMessages():
+    conn = connector.connect()
+    cursor = conn.cursor()
+    data = request.get_json()
+    val = (data['user_id'],data['contact_id'], data['contact_id'], data['user_id'])
+    sql = """
+SELECT sender, receiver, message, time FROM messages 
+WHERE sender=%s AND receiver=%s
+OR sender=%s AND receiver=%s 
+ORDER BY time desc;    """
+    cursor.execute(sql, val)
+    rv = cursor.fetchall()
+    payload = []
+    content = {}
+    for result in rv:
+        content = {'sender': result[0], 'receiver': result[1], 'message': result[2], 'time': result[3]}
+        payload.append(content)
+        content = {}
+    return jsonify(payload)
+
+@app.route('/getContacts', methods = ['POST'])
+def getContacts():
+    conn = connector.connect()
+    c = conn.cursor()
+    data = request.get_json()
+    condition = (data['user_id'],)
+    sql = "SELECT contact_id FROM contacts WHERE user_id=%s"
+    c.execute(sql, condition)
+    contacts = []
+    for contact in c.fetchall():
+        contacts.append(contact[0])
+    return jsonify({"contacts" : contacts})
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, port=80)
